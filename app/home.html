@@ -1,0 +1,61 @@
+{{params.name}}
+<form role="form" name="myForm" novalidate>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <select class="form-control" ng-model="select">
+                <option value="">choose type</option>
+                <option>Full Name</option>
+                <option>Phone number</option>
+                <option>Account number</option>
+            </select>
+
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-disabled="enInput"
+                       placeholder="{{select}}" name="input" ng-model="input" required/>
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit" value="Submit"
+                            ng-click="search()"
+                            ng-disabled="enInput || myForm.input.$dirty && myForm.input.$invalid">Go!</button>
+				</span>
+            </div>
+			<span style="color: red"
+                  ng-show="myForm.input.$dirty && myForm.input.$invalid"> <span ng-show="myForm.input.$error.required">User info is necessary</span>
+			</span>
+        </div>
+    </div>
+</form>
+<hr>
+<input type="text" ng-model="testFilter.name" placeholder="filter"/>
+<p ng-show="result">{{result}}</p>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+
+        <caption>Search Result</caption>
+        <thead>
+        <tr>
+            <th ng-click="orderBy('ID')">ID</th>
+            <th ng-click="orderBy('name')">Name</th>
+            <th ng-click="orderBy('email')">Email</th>
+            <th ng-click="orderBy('phone')">Phone</th>
+            <th ng-click="orderBy('acount')">Account number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in list|orderBy:myOrder|filter:testFilter"
+            ng-click="choose(x.ID)">
+            <td>{{ x.ID }}</td>
+            <td>{{ x.name }}</td>
+            <td>{{ x.email }}</td>
+            <td>{{ x.phone }}</td>
+            <td>{{ x.account }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<p ng-if="id">{{id}} is selected!</p>
+<div class="text-right">
+    <button type="submit" ng-click="submit()"></button>
+</div>

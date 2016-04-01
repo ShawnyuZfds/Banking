@@ -1,0 +1,18 @@
+<div class="container">
+	<!-- 	<div class="col-md-6 col-lg-6"></div> -->
+	<form role="form" class="col-md-6 col-lg-6">
+		<select ng-model="sel" class="form-control">
+			<option ng-repeat="x in records" value="{{x.balance}}">{{x.ID+"
+				- "+x.type+" "+x.num}}</option>
+		</select>
+		<h1 ng-show="bal" class="text-right"">
+			<small>Your balance is: </small><strong class="{{text}}">&nbsp;{{sel}}$</strong>
+		</h1>
+	</form>
+
+	{{test}}
+	<!-- 	<select ng-model="sel" class="form-control" -->
+	<!-- 		ng-options="x.ID +' '+ x.type + ' ' + x.num for x in records" -->
+	<!-- 		ng-click="show()"></select> -->
+	<!-- 	<h1>Your balance is: {{sel.balance}}$</h1> -->
+</div>

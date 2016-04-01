@@ -1,0 +1,17 @@
+#login{
+	background-color : yellow;
+	position: absolute;
+	right : 2%;
+	top: 25%;
+	padding: 5px;
+}
+
+#login:hover{
+	background-color : red;
+	cursor: pointer;
+}
+
+#myModal
+{
+	top:30%;
+}

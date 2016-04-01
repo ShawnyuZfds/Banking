@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bootstrap 实例</title>
+<!-- 包含头部信息用于适应不同设备 -->
+<meta name="viewport" content="width=device-width, initial-scale=1"
+	charset="UTF-8">
+<!-- 包含 bootstrap 样式表 -->
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('myCtrl', function($scope, $http) {
+		$scope.send = function() {
+			console.log("adfaf");
+			$http.get("home.html").then(function(response) {
+				$scope.myWelcome = response;
+			});
+		}
+	});
+</script>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div class="container">
+		<button ng-click="send()">send</button>
+		<p>Today's welcome message is:</p>
+		<p>{{myWelcome}}</p>
+	</div>
+</body>
+</html>
