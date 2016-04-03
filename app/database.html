@@ -2,15 +2,15 @@
     <thead>
     <tr>
         <td>name</td>
-        <td>password</td>
-        <td>profession</td>
+        <td>age</td>
+        <td>sal</td>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="(key, value) in people">
         <td>{{value.name}}</td>
-        <td>{{value.password}}</td>
-        <td>{{value.profession}}</td>
+        <td>{{value.age}}</td>
+        <td>{{value.sal}}</td>
 
         <td>
             <button class="btn btn-default btn-sm" ng-click="del(key)">
@@ -34,4 +34,4 @@
 </table>
 {{people}}
 
-<input type="button" ng-click="getTable()" value="submit">
+<input type="button" ng-click="get()" value="submit">

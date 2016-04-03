@@ -276,38 +276,65 @@ angular.module('controllers', [])
          // localStorage.setItem("people",people.join(","));
          // alert(JSON.parse(localStorage.getItem("people").split(",")[0]).name);
          // if (localStorage.getItem("people") == null) {*/
+        var add = [];
+        var del = [];
         $scope.people = [];
         $scope.add = function () {
+
             console.log("added!");
             if ($scope.name != null && $scope.age != null && $scope.sal != null) {
                 $scope.people.push({name: $scope.name, age: $scope.age, sal: $scope.sal});
+                add.push({name: $scope.name, age: $scope.age, sal: $scope.sal});
                 $scope.name = null;
                 $scope.age = null;
                 $scope.sal = null;
             }
-        };
-        $scope.del = function (x) {
-            console.log(x);
-            delete $scope.people[x];
-            console.log($scope.people);
-            console.log("deleted!");
-        };
-        $scope.getTable = function () {
             console.log("get table");
-            console.log($scope.people);
+            console.log(add);
             var req = {
                 method: 'GET',
-                url: 'http://192.168.1.12:3000/database/get',
+                url: 'http://192.168.1.12:3000/database/add',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                params: $scope.people
+                // data: $scope.people
+                params: add
             };
             $http(req).then(
                 function (response) {
-                    // var people =
-                    /* $scope.people = response.data;
-                     console.log(response.data);*/
+                    $scope = response.data;
+                },
+                function (response) {
+                    console.log(response);
+                })
+        };
+
+
+        $scope.del = function (x) {
+
+            console.log(x);
+            $scope.people.splice(x, 1);
+
+            console.log($scope.people);
+            console.log("deleted!");
+        };
+
+
+        $scope.get = function () {
+            console.log("get table");
+            var req = {
+                method: 'GET',
+                url: 'http://192.168.1.12:3000/database/get',
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
+                // data: $scope.people
+                // params: add
+            };
+            $http(req).then(
+                function (response) {
+                    console.log(response.data);
+                    $scope.people = response.data;
                 },
                 function (response) {
                     console.log(response);
