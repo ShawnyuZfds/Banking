@@ -74,7 +74,7 @@
     <div ui-view="viewA" class="well"></div>
     <div ui-view="viewB" class="well"></div>
 </div>
-<!-- 	<div ng-include="www.baidu.com"></div> -->
+
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -95,6 +95,7 @@
                         <label for="pwd">Password:</label> <input type="password"
                                                                   class="form-control" id="pwd" ng-model="passWord">
                     </div>
+                    <span>Login to: <input type="url" ng-model="url"></span>
                     <div>
                         {{message}}<a ng-show="retryLink" ng-click="submit()">retry</a>
                     </div>

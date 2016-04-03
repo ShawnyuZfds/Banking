@@ -7,10 +7,11 @@ angular.module('controllers', [])
         $scope.retryMessage = false;
         $scope.login = function () {
             $("#myModal").modal();
-        }
+        };
         $scope.testServ = function () {
             shang('1');
-        }
+        };
+        $scope.url = 'http://192.168.1.12:3000/users';
         // $scope.testServ1 = shang.myFun(1);
         $scope.submit = function () {
             // var data = JSON.stringify({
@@ -20,19 +21,19 @@ angular.module('controllers', [])
 
             var req = {
                 method: 'GET',
-                url: 'http://192.168.1.12:3000/',
+                url: $scope.url,
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 params: {
                     username: $scope.userName,
                     passwd: $scope.passWord
-                },
+                }
                 // data : {
                 // username : $scope.userName,
                 // passwd : $scope.passWord
                 // },
-            }
+            };
 
             console.log($scope.userName + " " + $scope.userName);
             console.log("submitting to " + req.url);
@@ -268,26 +269,49 @@ angular.module('controllers', [])
 
     })
 
-    .controller('dbController', function ($scope) {
-        var people = [{name: 'yao', age: 18, sal: 30},
-            {name: 'yu', age: 28, sal: 330},
-            {name: 'qiu', age: 34, sal: 430},];
-        // localStorage.setItem("people",people.join(","));
-        // alert(JSON.parse(localStorage.getItem("people").split(",")[0]).name);
-        // if (localStorage.getItem("people") == null) {
-        $scope.people = people;
-        // } else
-        //     $scope.people = localStorage.getItem("people");
-
+    .controller('dbController', function ($scope, $http) {
+        /*        var people = [{name: 'yao', age: 19, sal: 30},
+         {name: 'yu', age: 28, sal: 330},
+         {name: 'qiu', age: 34, sal: 430}];
+         // localStorage.setItem("people",people.join(","));
+         // alert(JSON.parse(localStorage.getItem("people").split(",")[0]).name);
+         // if (localStorage.getItem("people") == null) {*/
+        $scope.people = [];
         $scope.add = function () {
-            if ($scope.name != null && $scope.age != null && $scope.sal != null)
+            console.log("added!");
+            if ($scope.name != null && $scope.age != null && $scope.sal != null) {
                 $scope.people.push({name: $scope.name, age: $scope.age, sal: $scope.sal});
-
-            $scope.name = null;
-            $scope.age = null;
-            $scope.sal = null;
-        }
+                $scope.name = null;
+                $scope.age = null;
+                $scope.sal = null;
+            }
+        };
         $scope.del = function (x) {
-            $scope.people.splice(x, 1);
+            console.log(x);
+            delete $scope.people[x];
+            console.log($scope.people);
+            console.log("deleted!");
+        };
+        $scope.getTable = function () {
+            console.log("get table");
+            console.log($scope.people);
+            var req = {
+                method: 'GET',
+                url: 'http://192.168.1.12:3000/database/get',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                params: $scope.people
+            };
+            $http(req).then(
+                function (response) {
+                    // var people =
+                    /* $scope.people = response.data;
+                     console.log(response.data);*/
+                },
+                function (response) {
+                    console.log(response);
+                })
         }
+
     })

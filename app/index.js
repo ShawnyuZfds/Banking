@@ -1,7 +1,5 @@
-angular
-    .module(
-        'myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
-            'services'])
+angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
+        'services'])
 
     .config(function ($routeProvider, $locationProvider, $stateProvider) {
         $stateProvider
