@@ -279,14 +279,22 @@ angular.module('controllers', [])
         var add = [];
         var del = [];
         var put = [];
+        var url = 'http://172.17.28.172:3000/';
         $scope.people = [];
         $scope.enModify = [];
 
+        $scope.orderBy = function (x) {
+            $scope.myOrder = x;
+            // console.log($scope.people['x']);
+            // $scope.people = $scope.people.x.sort();
+        }
+
         $scope.get = function () {
             console.log("get table");
+            $scope.enModify = [];
             var req = {
                 method: 'GET',
-                url: 'http://192.168.1.12:3000/database/get',
+                url: url + 'database/get',
                 // headers: {
                 //     'Content-Type': 'application/json'
                 // },
@@ -295,11 +303,11 @@ angular.module('controllers', [])
             };
             $http(req).then(
                 function (response) {
-                    console.log(response.data);
+                    console.log(response);
                     $scope.people = response.data;
-                    for (x in  $scope.people) {
-                        $scope.enModify[x] = true;
-                    }
+                    // for (x in  $scope.people) {
+                    //     $scope.enModify[x] = true;
+                    // }
                     add = [];
                     del = [];
                     put = [];
@@ -323,7 +331,7 @@ angular.module('controllers', [])
             console.log(add);
             var req = {
                 method: 'GET',
-                url: 'http://192.168.1.12:3000/database/add',
+                url: url + 'database/add',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -333,23 +341,24 @@ angular.module('controllers', [])
             $http(req).then(
                 function (response) {
                     $scope = response.data;
-                    add = [];
                 },
                 function (response) {
                     console.log(response);
                 })
+            add = [];
         };
 
         $scope.del = function (x) {
-
+            $scope.enModify = [];
             console.log(x);
-            del.push($scope.people[x]._id);
-            $scope.people.splice(x, 1);
+            del.push(x._id);
+
+            $scope.people.splice($scope.people.indexOf(x), 1);
             console.log(del);
             console.log("deleted!");
             var req = {
                 method: 'DELETE',
-                url: 'http://192.168.1.12:3000/database/del',
+                url: url + 'database/del',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -377,16 +386,32 @@ angular.module('controllers', [])
         };
 
         $scope.put = function (x) {
-            if ($scope.enModify[x] = true) {
-                $scope.enModify[x] = false
-            } else {
-                $scope.enModify[x] = true;
-            }
 
+            var req = {
+                method: 'POST',
+                url: url + 'database/put',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // data: del
+                data: {'yu': 'hello'}
+            };
 
-            console.log($scope.people);
-            // $scope.people[x]
-            console.log($scope.enModify);
+            // $http.delete(req.url + $.param(del)).then(
+            //     function (response) {
+            //
+            //     },
+            //     function (response) {
+            //
+            //     }
+            // )
+            $http(req).then(
+                function (response) {
+                    console.log("res:" + response.data);
+                },
+                function (response) {
+                    console.log(response);
+                })
         }
 
     })
