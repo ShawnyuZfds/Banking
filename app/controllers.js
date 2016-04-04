@@ -278,7 +278,37 @@ angular.module('controllers', [])
          // if (localStorage.getItem("people") == null) {*/
         var add = [];
         var del = [];
+        var put = [];
         $scope.people = [];
+        $scope.enModify = [];
+
+        $scope.get = function () {
+            console.log("get table");
+            var req = {
+                method: 'GET',
+                url: 'http://192.168.1.12:3000/database/get',
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
+                // data: $scope.people
+                // params: add
+            };
+            $http(req).then(
+                function (response) {
+                    console.log(response.data);
+                    $scope.people = response.data;
+                    for (x in  $scope.people) {
+                        $scope.enModify[x] = true;
+                    }
+                    add = [];
+                    del = [];
+                    put = [];
+                },
+                function (response) {
+                    console.log(response);
+                })
+        }
+
         $scope.add = function () {
 
             console.log("added!");
@@ -303,42 +333,60 @@ angular.module('controllers', [])
             $http(req).then(
                 function (response) {
                     $scope = response.data;
+                    add = [];
                 },
                 function (response) {
                     console.log(response);
                 })
         };
-
 
         $scope.del = function (x) {
 
             console.log(x);
+            del.push($scope.people[x]._id);
             $scope.people.splice(x, 1);
-
-            console.log($scope.people);
+            console.log(del);
             console.log("deleted!");
-        };
-
-
-        $scope.get = function () {
-            console.log("get table");
             var req = {
-                method: 'GET',
-                url: 'http://192.168.1.12:3000/database/get',
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
-                // data: $scope.people
-                // params: add
+                method: 'DELETE',
+                url: 'http://192.168.1.12:3000/database/del',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // data: del
+                params: del
             };
+
+            // $http.delete(req.url + $.param(del)).then(
+            //     function (response) {
+            //
+            //     },
+            //     function (response) {
+            //
+            //     }
+            // )
             $http(req).then(
                 function (response) {
                     console.log(response.data);
-                    $scope.people = response.data;
+                    del = [];
                 },
                 function (response) {
                     console.log(response);
                 })
+
+        };
+
+        $scope.put = function (x) {
+            if ($scope.enModify[x] = true) {
+                $scope.enModify[x] = false
+            } else {
+                $scope.enModify[x] = true;
+            }
+
+
+            console.log($scope.people);
+            // $scope.people[x]
+            console.log($scope.enModify);
         }
 
     })
