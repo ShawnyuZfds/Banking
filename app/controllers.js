@@ -279,7 +279,7 @@ angular.module('controllers', [])
         var add = [];
         var del = [];
         var put = [];
-        var url = 'http://172.17.28.172:3000/';
+        var url = 'http://localhost:3000/';
         $scope.people = [];
         $scope.enModify = [];
 
@@ -319,33 +319,51 @@ angular.module('controllers', [])
 
         $scope.add = function () {
 
-            console.log("added!");
+
             if ($scope.name != null && $scope.age != null && $scope.sal != null) {
                 $scope.people.push({name: $scope.name, age: $scope.age, sal: $scope.sal});
                 add.push({name: $scope.name, age: $scope.age, sal: $scope.sal});
+                console.log("added!");
+                // add = {name: $scope.name, age: $scope.age, sal: $scope.sal};
                 $scope.name = null;
                 $scope.age = null;
                 $scope.sal = null;
+                var json = {};
+                for (var i = 0; i < add.length; i++) {
+                    json[i] = add[i];
+                }
+                JSON.stringify(json);
+                console.log(json);
+                // console.log(JSON.stringify(add));
+                console.log("get table");
+                var req = {
+                    method: 'POST',
+                    url: url + 'database/add',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    transformRequest: function (data) {
+                        return $.param(data);
+                    },
+                    data: json
+                    // params: add
+                };
+                $http(req).then(
+                    function (response) {
+                        $scope = response.data;
+                    },
+                    function (response) {
+                        console.log(response);
+                    });
+                /*  $http.post(req.url, req.data).then(
+                 function (response) {
+                 $scope = response.data;
+                 },
+                 function (response) {
+                 console.log(response);
+                 })*/
+                add = [];
             }
-            console.log("get table");
-            console.log(add);
-            var req = {
-                method: 'GET',
-                url: url + 'database/add',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                // data: $scope.people
-                params: add
-            };
-            $http(req).then(
-                function (response) {
-                    $scope = response.data;
-                },
-                function (response) {
-                    console.log(response);
-                })
-            add = [];
         };
 
         $scope.del = function (x) {
@@ -385,15 +403,15 @@ angular.module('controllers', [])
 
         };
 
-        $scope.put = function (x) {
-            
-            if ($scope.enModify[x] === true) {//save
-                $scope.enModify[x] = false
+        $scope.put = function (k, v) {
+            var index = $scope.people.indexOf(v);
+            if ($scope.enModify[index] === true) {//save
+                $scope.enModify[index] = false
                 console.log("saved!!")
             } else {//modify
-                $scope.enModify[x] = true;
+                $scope.enModify[index] = true;
             }
-
+            put.push(x);
 
             console.log($scope.people);
             // $scope.people[x]
@@ -407,7 +425,7 @@ angular.module('controllers', [])
                     'Content-Type': 'application/json'
                 },
                 // data: del
-                params: {yu: "hello"}
+                params: {'yu': 'hello'}
             };
 
             // $http.delete(req.url + $.param(del)).then(
@@ -420,7 +438,7 @@ angular.module('controllers', [])
             // )
             $http(req).then(
                 function (response) {
-                    console.log(response.data);
+                    console.log("res:" + response.data);
                 },
                 function (response) {
                     console.log(response);
