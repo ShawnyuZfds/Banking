@@ -386,6 +386,7 @@ angular.module('controllers', [])
         };
 
         $scope.put = function (x) {
+            
             if ($scope.enModify[x] === true) {//save
                 $scope.enModify[x] = false
                 console.log("saved!!")
