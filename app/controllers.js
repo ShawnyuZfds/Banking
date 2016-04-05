@@ -386,15 +386,27 @@ angular.module('controllers', [])
         };
 
         $scope.put = function (x) {
+            if ($scope.enModify[x] === true) {//save
+                $scope.enModify[x] = false
+                console.log("saved!!")
+            } else {//modify
+                $scope.enModify[x] = true;
+            }
+
+
+            console.log($scope.people);
+            // $scope.people[x]
+            console.log($scope.enModify);
+
 
             var req = {
-                method: 'POST',
+                method: 'PUT',
                 url: url + 'database/put',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 // data: del
-                data: {'yu': 'hello'}
+                params: {yu: "hello"}
             };
 
             // $http.delete(req.url + $.param(del)).then(
@@ -407,7 +419,7 @@ angular.module('controllers', [])
             // )
             $http(req).then(
                 function (response) {
-                    console.log("res:" + response.data);
+                    console.log(response.data);
                 },
                 function (response) {
                     console.log(response);
