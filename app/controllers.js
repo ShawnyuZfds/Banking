@@ -310,19 +310,15 @@ angular.module('controllers', [])
     })
 
     .controller('dbController', function ($scope, $http) {
-        /*        var people = [{name: 'yao', age: 19, sal: 30},
-         {name: 'yu', age: 28, sal: 330},
-         {name: 'qiu', age: 34, sal: 430}];
-         // localStorage.setItem("people",people.join(","));
-         // alert(JSON.parse(localStorage.getItem("people").split(",")[0]).name);
-         // if (localStorage.getItem("people") == null) {*/
         var add = [];
         var del = [];
         var put = [];
-        $scope.crudUrl = "http://172.17.28.112:3000/"
+
+        // $scope.crudUrl = "http://172.17.28.112:3000/"
+        $scope.crudUrl = "http://192.168.1.8:3000/"
         $scope.people = [];
         $scope.enModify = [];
-
+        $scope.en = [];
         $scope.orderBy = function (x) {
             $scope.myOrder = x;
             // console.log($scope.people['x']);
@@ -347,6 +343,10 @@ angular.module('controllers', [])
                 function (response) {
                     console.log(response);
                     $scope.people = response.data;
+                    // for (var i = 0; i < response.data.length; i++) {
+                    //     $scope.en.push({"index": i, "_id": response.data[i]._id});
+                    // }
+                    // console.log(people);
                     // for (x in  $scope.people) {
                     //     $scope.enModify[x] = true;
                     // }
@@ -445,45 +445,31 @@ angular.module('controllers', [])
 
         $scope.put = function (k, v) {
             var index = $scope.people.indexOf(v);
-            if ($scope.enModify[index] === true) {//save
-                $scope.enModify[index] = false;
-                put.push(v);
-                console.log("saved!!");
-            } else {//modify
-                $scope.enModify[index] = true;
-            }
-
-
-            console.log($scope.people);
-            // $scope.people[x]
-            console.log($scope.enModify);
-
-
             var req = {
                 method: 'PUT',
                 url: $scope.crudUrl + 'database/put',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                // data: del
-                data: 
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
+                data: put
             };
+            if ($scope.enModify[index] === true) {//save
+                $scope.enModify[index] = false;
+                put.push($scope.people[k]);
+                console.log(put);
 
-            // $http.delete(req.url + $.param(del)).then(
-            //     function (response) {
-            //
-            //     },
-            //     function (response) {
-            //
-            //     }
-            // )
-            $http(req).then(
-                function (response) {
-                    console.log("res:" + response.data);
-                },
-                function (response) {
-                    console.log(response);
-                })
+                $http(req).then(
+                    function (response) {
+                        console.log("res:" + response.data);
+                        console.log("saved!!");
+                        put = [];
+                    },
+                    function (response) {
+                        console.log(response);
+                    })
+            } else {//modify
+                $scope.enModify[index] = true;
+            }
         }
 
     })

@@ -11,9 +11,8 @@
     <tbody>
     <tr ng-repeat="(key, value) in people|orderBy:myOrder">
         <td><input type="text" ng-model="value.name" ng-disabled="!enModify[key]"></td>
-        <td>{{value.age}}</td>
-        <td>{{value.sal}}</td>
-
+        <td><input type="text" ng-model="value.age" ng-disabled="!enModify[key]"></td>
+        <td><input type="text" ng-model="value.sal" ng-disabled="!enModify[key]">key:{{key}}</td>
         <td>
             <!--{{key}}+{{$index}}-->
             <button class="btn btn-default btn-sm" ng-click="put(key,value)" ng-if="enModify[key]">
@@ -21,12 +20,12 @@
             </button>
             <button class="btn btn-default btn-sm btn-warning" ng-click="put(key,value)" ng-disabled="enModBtn"
                     ng-if="!enModify[key]">
-                <span class="glyphicon glyphicon-pencil"></span>mod
+                <span class="glyphicon glyphicon-pencil"></span>mod{{key}}
             </button>
             <button class="btn btn-default btn-sm btn-danger" ng-click="del(value)">
                 <span class="glyphicon glyphicon-minus"></span>del
             </button>
-            {{enModify[key]}}
+
         </td>
     </tr>
     <tr>
