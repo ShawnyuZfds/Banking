@@ -74,8 +74,48 @@ angular.module('controllers', [])
         }
     })
 
-    .controller('testController', function ($scope) {
+    .controller('testController', function ($scope, $http, $resource) {
+        var testObj = {
+            // "name": "ga", "age": "12", "sal": "34"
+            "name": "dfa",
+            "password": "dfag"
+        };
+        var body = JSON.stringify(testObj);
 
+        var req = {
+            // async: true,
+            // crossDomain: true,
+            url: 'http://192.168.1.5:8080/SpringAngular/rest/accounts/',
+            // url: 'http://192.168.1.12:3000/database/test',
+            method: 'post',
+            // headers: {
+            //     "content-Type": "application/json",
+            //     // "content-Type": "application/x-www-form-urlencoded",
+            //     // "cache-control": "no-cache"
+            // },
+            // processDate: false,
+            // data: JSON.stringify(testObj),
+            // data: {
+            //     "name": "dfa",
+            //     "password": "dfag"
+            // },
+            // json: true,
+            //
+        }
+        $scope.testPost = function () {
+            console.log("sent");
+            console.log(body);
+            $http.post(req.url, JSON.stringify({"name": "dfa", "password": "dfag"})).then(function (res) {
+                console.log(res);
+            }, function (res) {
+
+            })
+            // var User = $resource('http://localhost:8002/json');
+            // var user = new User();
+            // user.name = 'Ari';
+            // user.$save();
+
+        }
     })
 
     .controller('homeController', function ($scope, $rootScope, $routeParams) {
@@ -279,7 +319,7 @@ angular.module('controllers', [])
         var add = [];
         var del = [];
         var put = [];
-        var url = 'http://localhost:3000/';
+        $scope.crudUrl = "http://172.17.28.112:3000/"
         $scope.people = [];
         $scope.enModify = [];
 
@@ -294,7 +334,9 @@ angular.module('controllers', [])
             $scope.enModify = [];
             var req = {
                 method: 'GET',
-                url: url + 'database/get',
+                // url: url + 'database/get',
+                url: $scope.crudUrl + 'database/get',
+
                 // headers: {
                 //     'Content-Type': 'application/json'
                 // },
@@ -315,42 +357,48 @@ angular.module('controllers', [])
                 function (response) {
                     console.log(response);
                 })
+            console.log($scope.crudUrl);
         }
 
         $scope.add = function () {
 
-
             if ($scope.name != null && $scope.age != null && $scope.sal != null) {
                 $scope.people.push({name: $scope.name, age: $scope.age, sal: $scope.sal});
                 add.push({name: $scope.name, age: $scope.age, sal: $scope.sal});
-                console.log("added!");
                 // add = {name: $scope.name, age: $scope.age, sal: $scope.sal};
                 $scope.name = null;
                 $scope.age = null;
                 $scope.sal = null;
-                var json = {};
-                for (var i = 0; i < add.length; i++) {
-                    json[i] = add[i];
-                }
-                JSON.stringify(json);
-                console.log(json);
+                // var json =
+                // var json = {};
+                // for (var i = 0; i < add.length; i++) {
+                //     json[i] = add[i];
+                // }
+                // JSON.stringify(json);
+                // console.log(json);
                 // console.log(JSON.stringify(add));
-                console.log("get table");
+
                 var req = {
                     method: 'POST',
-                    url: url + 'database/add',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    transformRequest: function (data) {
-                        return $.param(data);
-                    },
-                    data: json
+                    url: $scope.crudUrl + 'database/add',
+                    // headers: {
+                    //     // 'Content-Type': 'application/x-www-form-urlencoded'
+                    //     'Content-Type': 'application/json'
+                    // },
+                    // transformRequest: function (data) {
+                    //     return $.param(data);
+                    // },
+                    // transformRequest: function (data, headerGetters) {
+                    //     headerGetters()['Content-Type'] = 'application/json';
+                    //     return angular.toJson(data);
+                    // },
+                    data: add
                     // params: add
                 };
                 $http(req).then(
                     function (response) {
-                        $scope = response.data;
+                        console.log("added!");
+                        console.log(response.data);
                     },
                     function (response) {
                         console.log(response);
@@ -364,6 +412,7 @@ angular.module('controllers', [])
                  })*/
                 add = [];
             }
+            console.log($scope.crudUrl);
         };
 
         $scope.del = function (x) {
@@ -376,42 +425,34 @@ angular.module('controllers', [])
             console.log("deleted!");
             var req = {
                 method: 'DELETE',
-                url: url + 'database/del',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                // data: del
+                url: $scope.crudUrl + 'database/del',
                 params: del
             };
 
-            // $http.delete(req.url + $.param(del)).then(
-            //     function (response) {
-            //
-            //     },
-            //     function (response) {
-            //
-            //     }
-            // )
-            $http(req).then(
-                function (response) {
-                    console.log(response.data);
-                    del = [];
-                },
-                function (response) {
-                    console.log(response);
-                })
+            $scope.delete = function () {
+                $http(req).then(
+                    function (response) {
+                        console.log(response.data);
+                        del = [];
+                    },
+                    function (response) {
+                        console.log(response);
+                    })
+            }
+
 
         };
 
         $scope.put = function (k, v) {
             var index = $scope.people.indexOf(v);
             if ($scope.enModify[index] === true) {//save
-                $scope.enModify[index] = false
-                console.log("saved!!")
+                $scope.enModify[index] = false;
+                put.push(v);
+                console.log("saved!!");
             } else {//modify
                 $scope.enModify[index] = true;
             }
-            put.push(x);
+
 
             console.log($scope.people);
             // $scope.people[x]
@@ -420,12 +461,12 @@ angular.module('controllers', [])
 
             var req = {
                 method: 'PUT',
-                url: url + 'database/put',
+                url: $scope.crudUrl + 'database/put',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 // data: del
-                params: {'yu': 'hello'}
+                data: 
             };
 
             // $http.delete(req.url + $.param(del)).then(

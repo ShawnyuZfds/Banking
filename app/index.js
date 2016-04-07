@@ -1,7 +1,7 @@
 angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
-        'services'])
+        'services', 'ngResource'])
 
-    .config(function ($routeProvider, $locationProvider, $stateProvider) {
+    .config(function ($routeProvider, $locationProvider, $stateProvider, $httpProvider) {
         $stateProvider
 
             .state('home', {
@@ -17,20 +17,20 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
                 }
             })
 
-            .state(
-                'view',
-                {
-                    url: "/view",
-                    views: {
-                        "viewA": {
-                            templateUrl: "view.html",
-                            controller: 'viewController'
-                        },
-                        "viewB": {
-                            template: "<a ui-sref='.list'>view.list</a><div ui-view></div>"
-                        }
+            .state('view', {
+                url: "/view",
+                views: {
+                    "viewA": {
+                        templateUrl: "view.html",
+                        controller: 'viewController'
+                    },
+                    "viewB": {
+                        template: "<a ui-sref='.list'>view.list</a><div ui-view></div>"
                     }
-                }).state('view.list', {
+                }
+            })
+
+            .state('view.list', {
                 url: "/list",
                 template: "<p>home.list</p>"
 
@@ -91,4 +91,15 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
         // });
 
         // $locationProvider.html5Mode(true);
+
+
+        // delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        // $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript';
+        // $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+        // $httpProvider.defaults.headers.post['Access-Control-Max-Age'] = '1728000';
+        // $httpProvider.defaults.headers.common['Access-Control-Max-Age'] = '1728000';
+        // $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript';
+        // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+        // $httpProvider.defaults.useXDomain = true;
+
     })
