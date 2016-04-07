@@ -15,10 +15,10 @@
         <td><input type="text" ng-model="value.sal" ng-disabled="!enModify[key]">key:{{key}}</td>
         <td>
             <!--{{key}}+{{$index}}-->
-            <button class="btn btn-default btn-sm" ng-click="put(key,value)" ng-if="enModify[key]">
+            <button class="btn btn-default btn-sm" ng-click="edit(key,value)" ng-if="enModify[key]">
                 <span class="glyphicon glyphicon-save"></span>save
             </button>
-            <button class="btn btn-default btn-sm btn-warning" ng-click="put(key,value)" ng-disabled="enModBtn"
+            <button class="btn btn-default btn-sm btn-warning" ng-click="edit(key,value)" ng-disabled="enModBtn"
                     ng-if="!enModify[key]">
                 <span class="glyphicon glyphicon-pencil"></span>mod{{key}}
             </button>
@@ -44,6 +44,6 @@
     </tr>
     </tbody>
 </table>
-<button ng-click="delete()">put</button>
+<button ng-click="confirm()">put</button>
 {{people}}
 

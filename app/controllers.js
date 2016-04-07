@@ -314,8 +314,8 @@ angular.module('controllers', [])
         var del = [];
         var put = [];
 
-        // $scope.crudUrl = "http://172.17.28.112:3000/"
-        $scope.crudUrl = "http://192.168.1.8:3000/"
+        $scope.crudUrl = "http://172.17.28.156:3000/"
+        // $scope.crudUrl = "http://192.168.1.8:3000/"
         $scope.people = [];
         $scope.enModify = [];
         $scope.en = [];
@@ -328,6 +328,7 @@ angular.module('controllers', [])
         $scope.get = function () {
             console.log("get table");
             $scope.enModify = [];
+
             var req = {
                 method: 'GET',
                 // url: url + 'database/get',
@@ -357,6 +358,7 @@ angular.module('controllers', [])
                 function (response) {
                     console.log(response);
                 })
+
             console.log($scope.crudUrl);
         }
 
@@ -378,41 +380,22 @@ angular.module('controllers', [])
                 // console.log(json);
                 // console.log(JSON.stringify(add));
 
-                var req = {
+                req = {
                     method: 'POST',
                     url: $scope.crudUrl + 'database/add',
-                    // headers: {
-                    //     // 'Content-Type': 'application/x-www-form-urlencoded'
-                    //     'Content-Type': 'application/json'
-                    // },
-                    // transformRequest: function (data) {
-                    //     return $.param(data);
-                    // },
-                    // transformRequest: function (data, headerGetters) {
-                    //     headerGetters()['Content-Type'] = 'application/json';
-                    //     return angular.toJson(data);
-                    // },
                     data: add
-                    // params: add
                 };
+
                 $http(req).then(
                     function (response) {
                         console.log("added!");
                         console.log(response.data);
+                        add = [];
                     },
                     function (response) {
                         console.log(response);
                     });
-                /*  $http.post(req.url, req.data).then(
-                 function (response) {
-                 $scope = response.data;
-                 },
-                 function (response) {
-                 console.log(response);
-                 })*/
-                add = [];
             }
-            console.log($scope.crudUrl);
         };
 
         $scope.del = function (x) {
@@ -423,27 +406,25 @@ angular.module('controllers', [])
             $scope.people.splice($scope.people.indexOf(x), 1);
             console.log(del);
             console.log("deleted!");
-            var req = {
+            req = {
                 method: 'DELETE',
                 url: $scope.crudUrl + 'database/del',
                 params: del
             };
 
-            $scope.delete = function () {
-                $http(req).then(
-                    function (response) {
-                        console.log(response.data);
-                        del = [];
-                    },
-                    function (response) {
-                        console.log(response);
-                    })
-            }
+            $http(req).then(
+                function (response) {
+                    console.log(response.data);
+                    del = [];
+                },
+                function (response) {
+                    console.log(response);
+                })
 
 
         };
 
-        $scope.put = function (k, v) {
+        $scope.edit = function (k, v) {
             var index = $scope.people.indexOf(v);
             var req = {
                 method: 'PUT',
@@ -458,18 +439,23 @@ angular.module('controllers', [])
                 put.push($scope.people[k]);
                 console.log(put);
 
-                $http(req).then(
-                    function (response) {
-                        console.log("res:" + response.data);
-                        console.log("saved!!");
-                        put = [];
-                    },
-                    function (response) {
-                        console.log(response);
-                    })
             } else {//modify
                 $scope.enModify[index] = true;
             }
+            $http(req).then(
+                function (response) {
+                    console.log("res:" + response.data);
+                    console.log("saved!!");
+                    put = [];
+                },
+                function (response) {
+                    console.log(response);
+                })
+        }
+
+        $scope.confirm = function () {
+
+
         }
 
     })
