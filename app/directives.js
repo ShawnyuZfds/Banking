@@ -1,5 +1,4 @@
-angular
-    .module('directives', [])
+angular.module('directives', [])
     .directive('shangYu', function () {
         return {
             restrict: 'E',

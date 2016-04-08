@@ -1,5 +1,5 @@
 angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
-        'services', 'ngResource'])
+        'services', 'ngResource', 'filters'])
 
     .config(function ($routeProvider, $locationProvider, $stateProvider, $httpProvider) {
         $stateProvider

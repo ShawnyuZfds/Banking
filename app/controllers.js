@@ -314,8 +314,8 @@ angular.module('controllers', [])
         var del = [];
         var put = [];
 
-        $scope.crudUrl = "http://172.17.28.156:3000/"
-        // $scope.crudUrl = "http://192.168.1.8:3000/"
+        // $scope.crudUrl = "http://172.17.28.156:3000/"
+        $scope.crudUrl = "http://192.168.1.8:3000/"
         $scope.people = [];
         $scope.enModify = [];
         $scope.en = [];
@@ -323,6 +323,22 @@ angular.module('controllers', [])
             $scope.myOrder = x;
             // console.log($scope.people['x']);
             // $scope.people = $scope.people.x.sort();
+        }
+
+        // Pagination in controller
+        $scope.currentPage = 0;
+        $scope.pageSize = 5;
+        $scope.numberOfPages = 1;
+// Pagination buttons
+        $scope.nextPage = function () {
+            if ($scope.currentPage < $scope.numberOfPages - 1)
+                $scope.currentPage++;
+            else console.log("last page!");
+        }
+        $scope.prePage = function () {
+            if ($scope.currentPage > 0)
+                $scope.currentPage--;
+            else console.log("first page!");
         }
 
         $scope.get = function () {
@@ -344,6 +360,10 @@ angular.module('controllers', [])
                 function (response) {
                     console.log(response);
                     $scope.people = response.data;
+                    var people = $scope.people;
+                    $scope.numberOfPages = Math.ceil(people.length / $scope.pageSize);
+
+                    // console.log(people[0]);
                     // for (var i = 0; i < response.data.length; i++) {
                     //     $scope.en.push({"index": i, "_id": response.data[i]._id});
                     // }
@@ -459,3 +479,4 @@ angular.module('controllers', [])
         }
 
     })
+    
