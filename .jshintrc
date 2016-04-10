@@ -1,7 +1,8 @@
 {
-  "globalstrict": true,
+  "globalstrict": false,
   "globals": {
-    "angular": false,
+    "angular": true,
+    "jQuery": true,
     "describe": false,
     "it": false,
     "expect": false,

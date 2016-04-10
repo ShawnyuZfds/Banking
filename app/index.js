@@ -1,14 +1,27 @@
+'use strict';
 angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
         'services', 'ngResource', 'filters'])
 
     .config(function ($routeProvider, $locationProvider, $stateProvider, $httpProvider) {
         $stateProvider
 
+            .state('index', {
+                url: "/",
+                views: {
+                    "viewA": {
+                        templateUrl: "home/home.html",
+                        controller: 'homeController'
+                    },
+                    "viewB": {
+                        template: "adfa"
+                    }
+                }
+            })
             .state('home', {
                 url: "/home",
                 views: {
                     "viewA": {
-                        templateUrl: "home.html",
+                        templateUrl: "home/home.html",
                         controller: 'homeController'
                     },
                     "viewB": {
@@ -21,7 +34,7 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
                 url: "/view",
                 views: {
                     "viewA": {
-                        templateUrl: "view.html",
+                        templateUrl: "view/view.html",
                         controller: 'viewController'
                     },
                     "viewB": {
@@ -37,10 +50,10 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
             })
 
             .state('test', {
-                url: "/test",
+                url: "/test/:id",
                 views: {
                     "viewA": {
-                        templateUrl: "test.html",
+                        templateUrl: "test/test.html",
                         controller: 'testController'
                     },
                     "viewB": {
@@ -54,7 +67,7 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
                 url: "/database",
                 views: {
                     "viewA": {
-                        templateUrl: "database.html",
+                        templateUrl: "database/database.html",
                         controller: 'dbController'
                     },
                     "viewB": {
@@ -62,7 +75,8 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
                     }
                 }
 
-            })
+            });
+        // .otherwise({redirectTo: '/'})
 
 
         // $routeProvider.when('/', {
@@ -102,4 +116,4 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
         // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
         // $httpProvider.defaults.useXDomain = true;
 
-    })
+    });

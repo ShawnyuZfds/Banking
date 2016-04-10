@@ -1,5 +1,5 @@
-angular.module('directives', [])
-    .directive('shangYu', function () {
+"use strict";
+angular.module('directives', []).directive('shangYu', function () {
         return {
             restrict: 'E',
             transclude: true,
@@ -25,7 +25,7 @@ angular.module('directives', [])
                 // });
                 // // e.html("'<p>123'+s.name+s.age+'</p>'");
             },
-            template: '<p>name:{{name}} age:{{age}}<div><div ng-transclude></div>',
+            template: '<p>name:{{name}} age:{{age}}<div><div ng-transclude></div>'
 //						templateUrl : 'ad.html'
             // ng-transclude></div>',
         }
@@ -83,26 +83,26 @@ angular.module('directives', [])
                     position: 'absolute',
                     right: '2%',
                     top: '25%',
-                    padding: '5px',
+                    padding: '5px'
                 });
                 e.on("mouseover", function () {
                     e.css({
                         backgroundColor: 'red',
-                        cursor: 'pointer',
+                        cursor: 'pointer'
                     });
-                })
+                });
                 e.on("mouseleave", function () {
                     e.css({
                         backgroundColor: 'yellow',
                         position: 'absolute',
                         right: '2%',
                         top: '25%',
-                        padding: '5px',
+                        padding: '5px'
                     });
                 })
 
             },
-            template: '<span>login</span> ',
+            template: '<span>login</span> '
         }
     })
 
@@ -128,7 +128,7 @@ angular.module('directives', [])
                     panes.push(pane);
                 };
             }],
-            templateUrl: 'my-tabs.html'
+            templateUrl: 'test/my-tabs.html'
         };
     })
 
@@ -143,7 +143,7 @@ angular.module('directives', [])
             link: function (scope, element, attrs, tabsCtrl) {
                 tabsCtrl.addPane(scope);
             },
-            templateUrl: 'my-pane.html'
+            templateUrl: 'test/my-pane.html'
         };
     })
 
@@ -173,4 +173,4 @@ angular.module('directives', [])
         }
 
 
-    })
+    });
