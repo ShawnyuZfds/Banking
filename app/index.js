@@ -4,7 +4,6 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
 
     .config(function ($routeProvider, $locationProvider, $stateProvider, $httpProvider) {
         $stateProvider
-
             .state('index', {
                 url: "/",
                 views: {
@@ -50,7 +49,7 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
             })
 
             .state('test', {
-                url: "/test/:id",
+                url: "/test/:Uid",
                 views: {
                     "viewA": {
                         templateUrl: "test/test.html",

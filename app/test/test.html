@@ -1,30 +1,40 @@
-<button ng-click="testPost()">test</button>
-<form method="post" action="http://localhost:8002/json">
-    <input type="text">
-
-</form>
-<input type="button" value="submit" ng-click="testPost()">
-
-阿道 {{testServ1}}
-<button ng-click="testServ()">3 time</button>
-<shang-yu name="shang" age="25">
-    <qiu-shi num="3"></qiu-shi>
-    <qiu-shi num="5"></qiu-shi>
-    <mo-jie num="4"></mo-jie>
-</shang-yu>
-
-
-<my-tabs>
-    <my-pane title="Hello">
-        <p>Lorem ipsum dolor sit amet</p>
-    </my-pane>
-    <my-pane title="World"><em>Mauris elementum elementum
-        enim at suscipit.</em>
-        <p>
-            <a href ng-click="i = i + 1">counter: {{i || 0}}</a>
-        </p>
-    </my-pane>
-</my-tabs>
+<div class="container">
+    <span class="btn btn-info" data-toggle="collapse" data-target="#stateParams">Test stateParams</span>
+    <div id="stateParams" class="collapse">
+        <span>Test stateParams: {{params}}</span>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <span class="btn btn-info" data-toggle="collapse" data-target="#Service">Test Service</span>
+    <div id="Service" class="collapse">
+        <span>Test Service: <button ng-click="testServ()">3 time</button></span>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <span class="btn btn-info" data-toggle="collapse" data-target="#directive">Test custom directive</span>
+    <div id="directive" class="collapse">
+        <span>Test custom directive:
+            <login ng-click="login()"></login>
+            <shang-yu name="shang" age="25">
+                <qiu-shi num="3"></qiu-shi>
+                <qiu-shi num="5"></qiu-shi>
+                <mo-jie num="4"></mo-jie>
+            </shang-yu>
+            <my-tabs>
+                <my-pane title="Hello">
+                    <p>I am content1</p>
+                </my-pane>
+                <my-pane title="World">
+                    <p>I am content2</p>
+                    <p><a href="#" ng-click="i = i + 1">counter: {{i || 0}}</a></p>
+                </my-pane>
+            </my-tabs>
+        </span>
+    </div>
+</div>
+<hr>
 
 
 <div id='calendar'></div>

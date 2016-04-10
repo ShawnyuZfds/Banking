@@ -77,6 +77,7 @@ angular.module('directives', []).directive('shangYu', function () {
     .directive('login', function () {
         return {
             restrict: 'E',
+            transclude: true,
             link: function (s, e, a) {
                 e.css({
                     backgroundColor: 'yellow',
@@ -94,15 +95,15 @@ angular.module('directives', []).directive('shangYu', function () {
                 e.on("mouseleave", function () {
                     e.css({
                         backgroundColor: 'yellow',
-                        position: 'absolute',
-                        right: '2%',
-                        top: '25%',
-                        padding: '5px'
+                        // position: 'absolute',
+                        // right: '2%',
+                        // top: '25%',
+                        // padding: '5px'
                     });
                 });
 
             },
-            template: '<span>login</span> '
+            template: '<a href="#">login</a> '
         };
     })
 
@@ -171,6 +172,4 @@ angular.module('directives', []).directive('shangYu', function () {
             },
             templateUrl: 'dbTable.html'
         };
-
-
     });
