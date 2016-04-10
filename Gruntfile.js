@@ -4,10 +4,10 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
+            hint: ['app/*.js', 'app/database/**/*.js', 'app/edit/**/*.js', 'app/home/**/*.js', 'app/test/**/*.js', 'app/view/**/*.js'],
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: '.jshintrc',
             },
-            hint: ['app/*.js']
         },
         watch: {
             jsWatcher: {

@@ -28,7 +28,7 @@ angular.module('directives', []).directive('shangYu', function () {
             template: '<p>name:{{name}} age:{{age}}<div><div ng-transclude></div>'
 //						templateUrl : 'ad.html'
             // ng-transclude></div>',
-        }
+        };
     })
 
     .directive('qiuShi', function () {
@@ -46,11 +46,11 @@ angular.module('directives', []).directive('shangYu', function () {
             controller: function ($scope, $element, $attrs) {
                 this.wang = function () {
                     return 'wang';
-                }
+                };
             },
             template: '<div><div><span>Hello {{name}}{{num}}{{test}}</span></div></div>'
 
-        }
+        };
     })
 
     .directive('moJie', function () {
@@ -71,7 +71,7 @@ angular.module('directives', []).directive('shangYu', function () {
             },
             template: '<div><div><span>Hello {{name}}{{num}}{{test}}</span></div></div>'
 
-        }
+        };
     })
 
     .directive('login', function () {
@@ -99,11 +99,11 @@ angular.module('directives', []).directive('shangYu', function () {
                         top: '25%',
                         padding: '5px'
                     });
-                })
+                });
 
             },
             template: '<span>login</span> '
-        }
+        };
     })
 
     .directive('myTabs', function () {
@@ -155,7 +155,7 @@ angular.module('directives', []).directive('shangYu', function () {
                 // console.log(peopleIn);
                 s.add = function () {
                     console.log("added!");
-                    if (s.name != null && s.age != null && s.sal != null) {
+                    if (s.name !== null && s.age !== null && s.sal !== null) {
                         s.people.push({name: s.name, age: s.age, sal: s.sal});
                         s.name = null;
                         s.age = null;
@@ -170,7 +170,7 @@ angular.module('directives', []).directive('shangYu', function () {
                 };
             },
             templateUrl: 'dbTable.html'
-        }
+        };
 
 
     });

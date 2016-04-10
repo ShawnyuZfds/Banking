@@ -2,16 +2,14 @@
 angular.module('controllers', ['editController', 'dbController', 'viewController', 'homeController', 'testController'])
     // CONTROLLERS ============================================
     // home page controller
-    .controller('index', function ($scope, $http, $interval, $timeout, shang) {
+    .controller('index', function ($scope, $http, $interval, $timeout) {
         $scope.submitting = false;
         $scope.errorMessage = false;
         $scope.retryMessage = false;
         $scope.login = function () {
             $("#myModal").modal();
         };
-        $scope.testServ = function () {
-            shang('1');
-        };
+
         $scope.url = 'http://192.168.1.12:3000/users';
         // $scope.testServ1 = shang.myFun(1);
         $scope.submit = function () {
@@ -72,4 +70,4 @@ angular.module('controllers', ['editController', 'dbController', 'viewController
 
                 });
         };
-    })
+    });

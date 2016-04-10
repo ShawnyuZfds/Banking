@@ -1,8 +1,9 @@
 {
-  "globalstrict": false,
+  "strict": "global",
   "globals": {
     "angular": true,
-    "jQuery": true,
+    "$": false,
+    "jQuery": false,
     "describe": false,
     "it": false,
     "expect": false,
@@ -10,5 +11,7 @@
     "afterEach": false,
     "module": false,
     "inject": false
-  }
+  },
+  "browser": true,
+  "devel": true
 }

@@ -1,6 +1,6 @@
 "use strict";
-angular.module('homeController', []).controller('homeController', function ($scope, $rootScope, $routeParams) {
-    $scope.params = $routeParams;
+angular.module('homeController', []).controller('homeController', function ($scope, $rootScope) {
+
     $scope.list = [];
     $scope.enInput = true;
     var users = [{
@@ -67,27 +67,9 @@ angular.module('homeController', []).controller('homeController', function ($sco
         $scope.myOrder = x;
     };
 
-    $scope.submit = function () {
-        $http.post('/someUrl', $rootScope.id).then(
-            function successCallback(response) {
-                // this callback will be called asynchronously
-                // when the response is available
-                alert("success!!" + response.data);
-
-            }, function errorCallback(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                alert("failed!!");
-            });
-    };
-
     $scope.$watch('select', function () {
         $scope.enInput = true;
-        if ($scope.select === null || $scope.select === "") {
-            $scope.enInput = true;
-        } else {
-            $scope.enInput = false;
-        }
+        $scope.enInput = !!($scope.select === null || $scope.select === "");
     });
 
     $('#calendar').fullCalendar({
