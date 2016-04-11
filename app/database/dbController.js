@@ -5,7 +5,7 @@ angular.module('dbController', []).controller('dbController', function ($scope, 
     var put = [];
 
     // $scope.crudUrl = "http://172.17.28.156:3000/"
-    $scope.crudUrl = "http://192.168.1.8:3000/";
+    $scope.crudUrl = "http://192.168.1.9:3000/";
     $scope.people = [];
     $scope.enModify = [];
     $scope.en = [];

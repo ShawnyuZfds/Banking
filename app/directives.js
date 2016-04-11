@@ -151,25 +151,27 @@ angular.module('directives', []).directive('shangYu', function () {
     .directive('dbTable', function () {
         return {
             restrict: 'AE',
-            link: function (s, e, a) {
-                // s.people = JSON.parse(a.people);
-                // console.log(peopleIn);
-                s.add = function () {
-                    console.log("added!");
-                    if (s.name !== null && s.age !== null && s.sal !== null) {
-                        s.people.push({name: s.name, age: s.age, sal: s.sal});
-                        s.name = null;
-                        s.age = null;
-                        s.sal = null;
-                    }
-                };
-                s.del = function (x) {
-                    console.log(x);
-                    delete s.people[x];
-                    console.log(s.people);
-                    console.log("deleted!");
-                };
+            scope: {
+                itemKey: '@',
+                itemVal: '@'
             },
-            templateUrl: 'dbTable.html'
+            link: function (s, e, a) {
+                s.key = a.itemKey;
+                s.val = a.itemVal;
+            },
+            templateUrl: 'database/template_tableItem.html'
+        };
+    })
+
+    .directive('collapseDiv', function () {
+        return {
+            restrict: 'AE',
+            transclude: true,
+            scope: {
+                name: '@'
+            },
+            link: function (s, e, a) {
+            },
+            templateUrl: 'test/collapseDiv.html'
         };
     });

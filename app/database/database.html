@@ -13,24 +13,27 @@
     <tbody>
 
 
-    <tr ng-repeat="(key, value) in people |startFrom: currentPage*pageSize|limitTo:pageSize|orderBy:myOrder track by $index">
-        <td><input type="text" ng-model="value.name" ng-disabled="!enModify[key]"></td>
-        <td><input type="text" ng-model="value.age" ng-disabled="!enModify[key]"></td>
-        <td><input type="text" ng-model="value.sal" ng-disabled="!enModify[key]">key:{{key}}</td>
-        <td>
-            {{value.$$hashKey}}
-            <button class="btn btn-default btn-sm" ng-click="edit(key,value)" ng-if="enModify[key]">
-                <span class="glyphicon glyphicon-save"></span>save
-            </button>
-            <button class="btn btn-default btn-sm btn-warning" ng-click="edit(key,value)" ng-disabled="enModBtn"
-                    ng-if="!enModify[key]">
-                <span class="glyphicon glyphicon-pencil"></span>mod{{key}}
-            </button>
-            <button class="btn btn-default btn-sm btn-danger" ng-click="del(value)">
-                <span class="glyphicon glyphicon-minus"></span>del
-            </button>
+    <tr ng-repeat="(key,value) in people |startFrom: currentPage*pageSize|limitTo:pageSize|orderBy:myOrder track by $index">
+        <db-table itemKey="{{key}}" itemVal="{{value}}"></db-table>
 
-        </td>
+
+        <!--<td><input type="text" ng-model="value.name" ng-disabled="!enModify[key]"></td>-->
+        <!--<td><input type="text" ng-model="value.age" ng-disabled="!enModify[key]"></td>-->
+        <!--<td><input type="text" ng-model="value.sal" ng-disabled="!enModify[key]">key:{{key}}</td>-->
+        <!--<td>-->
+        <!--{{value.$$hashKey}}-->
+        <!--<button class="btn btn-default btn-sm" ng-click="edit(key,value)" ng-if="enModify[key]">-->
+        <!--<span class="glyphicon glyphicon-save"></span>save-->
+        <!--</button>-->
+        <!--<button class="btn btn-default btn-sm btn-warning" ng-click="edit(key,value)" ng-disabled="enModBtn"-->
+        <!--ng-if="!enModify[key]">-->
+        <!--<span class="glyphicon glyphicon-pencil"></span>mod{{key}}-->
+        <!--</button>-->
+        <!--<button class="btn btn-default btn-sm btn-danger" ng-click="del(value)">-->
+        <!--<span class="glyphicon glyphicon-minus"></span>del-->
+        <!--</button>-->
+
+        <!--</td>-->
     </tr>
     <tr>
         <td><input type="text" ng-model="name" form="form1" required></td>

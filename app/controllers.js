@@ -10,7 +10,7 @@ angular.module('controllers', ['editController', 'dbController', 'viewController
             $("#myModal").modal();
         };
 
-        $scope.url = 'http://192.168.1.12:3000/users';
+        $scope.url = 'http://192.168.1.9:3000/users';
         // $scope.testServ1 = shang.myFun(1);
         $scope.submit = function () {
             // var data = JSON.stringify({
