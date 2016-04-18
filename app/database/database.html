@@ -8,37 +8,40 @@
         <th ng-click="orderBy('name')">name</th>
         <th ng-click="orderBy('age')">age</th>
         <th ng-click="orderBy('sal')">sal</th>
+        <th ng-click="orderBy('title')">sal</th>
     </tr>
     </thead>
     <tbody>
 
 
     <tr ng-repeat="(key,value) in people |startFrom: currentPage*pageSize|limitTo:pageSize|orderBy:myOrder track by $index">
-        <db-table itemKey="{{key}}" itemVal="{{value}}"></db-table>
+        <!--<db-table itemKey="{{key}}" itemVal="{{value}}"></db-table>-->
 
 
-        <!--<td><input type="text" ng-model="value.name" ng-disabled="!enModify[key]"></td>-->
-        <!--<td><input type="text" ng-model="value.age" ng-disabled="!enModify[key]"></td>-->
-        <!--<td><input type="text" ng-model="value.sal" ng-disabled="!enModify[key]">key:{{key}}</td>-->
-        <!--<td>-->
-        <!--{{value.$$hashKey}}-->
-        <!--<button class="btn btn-default btn-sm" ng-click="edit(key,value)" ng-if="enModify[key]">-->
-        <!--<span class="glyphicon glyphicon-save"></span>save-->
-        <!--</button>-->
-        <!--<button class="btn btn-default btn-sm btn-warning" ng-click="edit(key,value)" ng-disabled="enModBtn"-->
-        <!--ng-if="!enModify[key]">-->
-        <!--<span class="glyphicon glyphicon-pencil"></span>mod{{key}}-->
-        <!--</button>-->
-        <!--<button class="btn btn-default btn-sm btn-danger" ng-click="del(value)">-->
-        <!--<span class="glyphicon glyphicon-minus"></span>del-->
-        <!--</button>-->
+        <td><input type="text" ng-model="value.name" ng-disabled="!enModify[key]"></td>
+        <td><input type="text" ng-model="value.age" ng-disabled="!enModify[key]"></td>
+        <td><input type="text" ng-model="value.sal" ng-disabled="!enModify[key]">key:{{key}}</td>
+        <td><input type="text" ng-model="value.title" ng-disabled="!enModify[key]">key:{{key}}</td>
+        <td>
+            {{value.$$hashKey}}
+            <button class="btn btn-default btn-sm" ng-click="edit(key,value)" ng-if="enModify[key]">
+                <span class="glyphicon glyphicon-save"></span>save
+            </button>
+            <button class="btn btn-default btn-sm btn-warning" ng-click="edit(key,value)" ng-disabled="enModBtn"
+                    ng-if="!enModify[key]">
+                <span class="glyphicon glyphicon-pencil"></span>mod{{key}}
+            </button>
+            <button class="btn btn-default btn-sm btn-danger" ng-click="del(value)">
+                <span class="glyphicon glyphicon-minus"></span>del
+            </button>
 
-        <!--</td>-->
+        </td>
     </tr>
     <tr>
         <td><input type="text" ng-model="name" form="form1" required></td>
         <td><input type="number" ng-model="age" form="form1" required></td>
         <td><input type="number" ng-model="sal" form="form1" required></td>
+        <td><input type="number" ng-model="title" form="form1" required></td>
         <td>
             <form id="form1" style="display: inline">
                 <button type="submit" class="btn btn-default btn-sm btn-success" ng-click="add()">
