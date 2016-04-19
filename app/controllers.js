@@ -2,7 +2,7 @@
 angular.module('controllers', ['editController', 'dbController', 'viewController', 'homeController', 'testController'])
     // CONTROLLERS ============================================
     // home page controller
-    .controller('index', function ($scope, $http, $interval, $timeout) {
+    .controller('index', function ($scope, $http, $interval, $timeout, $document) {
         $scope.submitting = false;
         $scope.errorMessage = false;
         $scope.retryMessage = false;

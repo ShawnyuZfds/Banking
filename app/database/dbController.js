@@ -1,5 +1,5 @@
 "use strict";
-angular.module('dbController', []).controller('dbController', function ($scope, $http) {
+angular.module('dbController', []).controller('dbController', function ($scope, $http, $filter) {
     var add = [];
     var del = [];
     var put = [];
@@ -10,7 +10,15 @@ angular.module('dbController', []).controller('dbController', function ($scope, 
     $scope.enModify = [];
     $scope.en = [];
     $scope.orderBy = function (x) {
-        $scope.myOrder = x;
+        // $scope.myOrder = x;
+        var modBool = false;
+        for (x in $scope.enModify) {
+            modBool = $scope.enModify[x] | modBool;
+        }
+        if (!modBool) {
+            $scope.people = $filter('orderBy')($scope.people, x);
+        }
+
         // console.log($scope.people['x']);
         // $scope.people = $scope.people.x.sort();
     };
@@ -30,7 +38,6 @@ angular.module('dbController', []).controller('dbController', function ($scope, 
             $scope.currentPage--;
         else console.log("first page!");
     };
-
     $scope.get = function () {
         console.log("get table");
         $scope.enModify = [];
@@ -38,7 +45,7 @@ angular.module('dbController', []).controller('dbController', function ($scope, 
         var req = {
             method: 'GET',
             // url: url + 'database/get',
-            url: $scope.crudUrl + 'database/get',
+            url: $scope.crudUrl + 'database',
 
             // headers: {
             //     'Content-Type': 'application/json'
@@ -71,7 +78,6 @@ angular.module('dbController', []).controller('dbController', function ($scope, 
 
         console.log($scope.crudUrl);
     };
-
     $scope.add = function () {
 
         if ($scope.name !== null && $scope.age !== null && $scope.sal !== null) {
@@ -92,7 +98,7 @@ angular.module('dbController', []).controller('dbController', function ($scope, 
 
             var req = {
                 method: 'POST',
-                url: $scope.crudUrl + 'database/add',
+                url: $scope.crudUrl + 'database',
                 data: add
             };
 
@@ -118,7 +124,7 @@ angular.module('dbController', []).controller('dbController', function ($scope, 
         console.log("deleted!");
         var req = {
             method: 'DELETE',
-            url: $scope.crudUrl + 'database/del',
+            url: $scope.crudUrl + 'database',
             params: del
         };
 
@@ -138,7 +144,7 @@ angular.module('dbController', []).controller('dbController', function ($scope, 
         var index = $scope.people.indexOf(v);
         var req = {
             method: 'PUT',
-            url: $scope.crudUrl + 'database/put',
+            url: $scope.crudUrl + 'database',
             // headers: {
             //     'Content-Type': 'application/json'
             // },

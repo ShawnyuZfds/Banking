@@ -151,13 +151,15 @@ angular.module('directives', []).directive('shangYu', function () {
     .directive('dbTable', function () {
         return {
             restrict: 'AE',
+            transclude: true,
             scope: {
-                itemKey: '@',
-                itemVal: '@'
+                // itemKey: '@',
+                // itemVal: '@'
             },
             link: function (s, e, a) {
-                s.key = a.itemKey;
-                s.val = a.itemVal;
+                s.itemKey = a.itemKey;
+                s.itemVal = a.itemVal;
+                alert(a.itemKey);
             },
             templateUrl: 'database/template_tableItem.html'
         };

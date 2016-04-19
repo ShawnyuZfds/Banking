@@ -16,3 +16,43 @@
     <!-- 		ng-click="show()"></select> -->
     <!-- 	<h1>Your balance is: {{sel.balance}}$</h1> -->
 </div>
+<my-tabs>
+    <my-pane title="transaction">
+        <p>I am content1</p>
+    </my-pane>
+    <my-pane title="submit form">
+        <p><a data-toggle="modal" href="#ICL">increase credit line</a></p>
+    </my-pane>
+</my-tabs>
+
+<div class="modal fade" id="ICL" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4>increase credit line application</h4></div>
+            <div class="modal-body">
+                <table>
+                    <tr>
+                        <td><label for="firstName">first name</label></td>
+                        <td><input type="text" id="firstName"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="lastName">last name</label></td>
+                        <td><input type="text" id="lastName"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="phoneNum">phone number</label></td>
+                        <td><input type="text" id="phoneNum"><br></td>
+                    </tr>
+
+
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary">submit</button>
+                <button class="btn btn-danger" data-dismiss="modal">cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,6 +1,8 @@
-<input type="text" ng-model="crudUrl">
+IP:<input type="text" ng-model="crudUrl">
 <button class="btn btn-group-sm" ng-click="prePage()">previous</button>
 <button class="btn btn-group-sm" ng-click="nextPage()">Next</button>
+<input type="text" ng-model="pageSize"> items per page
+
 {{currentPage+1}}/{{numberOfPages}}
 <table class="table table-striped table-hover table-responsive">
     <thead>

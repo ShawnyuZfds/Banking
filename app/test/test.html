@@ -1,15 +1,23 @@
-<collapse-div>
+<collapse-div name="Internationalization">
+    <h1>{{ 'TITLE' | translate }}</h1>
+    <p>{{ 'PARA' | translate }}</p>
+    <button ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN"></button>
+    <button ng-click="changeLanguage('de')" translate="BUTTON_LANG_DE"></button>
+</collapse-div>
 
 
+<collapse-div name="testInjector">
+    <button ng-click="doSomething()">increment</button>
+    {{value()}}
 </collapse-div>
 
 <collapse-div name="stateParams">
     <span>Test stateParams: {{params}}</span>
 </collapse-div>
 
-
 <collapse-div name="Service">
     <span>Test Service: <button ng-click="testServ()">3 time</button></span>
+    <span>Test $locale: {{testLocale}}</span>
 </collapse-div>
 
 <collapse-div name="directive">
@@ -32,6 +40,22 @@
         </span>
 </collapse-div>
 
-<collapse-div name="calendar">
-    <div id='calendar'></div>
+<collapse-div name="testTable">
+    <table class="table table-hover table-bordered">
+        <thead>
+
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>2 row</td>
+            <td>2 row</td>
+        </tr>
+        </tbody>
+    </table>
+
+
 </collapse-div>

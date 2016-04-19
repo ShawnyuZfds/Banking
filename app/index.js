@@ -1,8 +1,8 @@
 'use strict';
 angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
-        'services', 'ngResource', 'filters'])
+        'services', 'ngResource', 'filters', 'pascalprecht.translate'])
 
-    .config(function ($routeProvider, $locationProvider, $stateProvider, $httpProvider) {
+    .config(function ($routeProvider, $locationProvider, $stateProvider, $translateProvider) {
         $stateProvider
             .state('index', {
                 url: "/",
@@ -28,7 +28,6 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
                     }
                 }
             })
-
             .state('view', {
                 url: "/view",
                 views: {
@@ -41,13 +40,11 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
                     }
                 }
             })
-
             .state('view.list', {
                 url: "/list",
                 template: "<p>home.list</p>"
 
             })
-
             .state('test', {
                 url: "/test/:Uid",
                 views: {
@@ -61,7 +58,6 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
                 }
 
             })
-
             .state('database', {
                 url: "/database",
                 views: {
@@ -75,6 +71,21 @@ angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
                 }
 
             });
+        $translateProvider
+            .translations('en', {
+                TITLE: 'Hello',
+                PARA: 'This is a paragraph.',
+                BUTTON_LANG_EN: 'english',
+                BUTTON_LANG_DE: 'german'
+            })
+            .translations('de', {
+                TITLE: 'Hallo',
+                PARA: 'Dies ist ein Paragraph.',
+                BUTTON_LANG_EN: 'englisch',
+                BUTTON_LANG_DE: 'deutsch'
+            });
+        //setting default language
+        $translateProvider.preferredLanguage('en');
         // .otherwise({redirectTo: '/'})
 
 

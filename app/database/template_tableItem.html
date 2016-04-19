@@ -1,16 +1,18 @@
-<td><input type="text" ng-model="itemVal.name" ng-disabled="!enModify[key]"></td>
-<td><input type="text" ng-model="itemVal.age" ng-disabled="!enModify[key]"></td>
-<td><input type="text" ng-model="itemVal.sal" ng-disabled="!enModify[key]">key:{{itemVal}}{{itemKey}}</td>
 <td>
-    {{value.$$hashKey}}
-    <button class="btn btn-default btn-sm" ng-click="edit(key,value)" ng-if="enModify[key]">
-        <span class="glyphicon glyphicon-save"></span>save
-    </button>
-    <button class="btn btn-default btn-sm btn-warning" ng-click="edit(key,value)" ng-disabled="enModBtn"
-            ng-if="!enModify[key]">
-        <span class="glyphicon glyphicon-pencil"></span>mod{{key}}
-    </button>
-    <button class="btn btn-default btn-sm btn-danger" ng-click="del(value)">
-        <span class="glyphicon glyphicon-minus"></span>del
-    </button>
+    <div ng-transclude></div>
 </td>
+<!--<td><input type="text" ng-model="itemVal.name" ng-disabled="!enModify"></td>-->
+<!--<td><input type="text" ng-model="itemVal.age" ng-disabled="!enModify"></td>-->
+<!--<td><input type="text" ng-model="itemVal.sal" ng-disabled="!enModify">key:{{itemVal}}{{itemKey}}</td>-->
+<!--<td>-->
+<!--<button class="btn btn-default btn-sm" ng-click="edit(key,value)" ng-if="enModify">-->
+<!--<span class="glyphicon glyphicon-save"></span>save-->
+<!--</button>-->
+<!--<button class="btn btn-default btn-sm btn-warning" ng-click="edit(key,value)" ng-disabled="enModBtn"-->
+<!--ng-if="!enModify">-->
+<!--<span class="glyphicon glyphicon-pencil"></span>mod{{key}}-->
+<!--</button>-->
+<!--<button class="btn btn-default btn-sm btn-danger" ng-click="del(value)">-->
+<!--<span class="glyphicon glyphicon-minus"></span>del-->
+<!--</button>-->
+<!--</td>-->
