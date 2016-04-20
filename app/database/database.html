@@ -10,20 +10,21 @@ IP:<input type="text" ng-model="crudUrl">
         <th ng-click="orderBy('name')">name</th>
         <th ng-click="orderBy('age')">age</th>
         <th ng-click="orderBy('sal')">sal</th>
-        <th ng-click="orderBy('title')">sal</th>
+        <th ng-click="orderBy('title')">title</th>
     </tr>
     </thead>
     <tbody>
 
 
-    <tr ng-repeat="(key,value) in people |startFrom: currentPage*pageSize|limitTo:pageSize|orderBy:myOrder track by $index">
+    <tr ng-repeat="(key,value) in people |startFrom: currentPage*pageSize|limitTo:pageSize|orderBy:myOrder"
+        class="fadeAn">
         <!--<db-table itemKey="{{key}}" itemVal="{{value}}"></db-table>-->
 
 
         <td><input type="text" ng-model="value.name" ng-disabled="!enModify[key]"></td>
         <td><input type="text" ng-model="value.age" ng-disabled="!enModify[key]"></td>
-        <td><input type="text" ng-model="value.sal" ng-disabled="!enModify[key]">key:{{key}}</td>
-        <td><input type="text" ng-model="value.title" ng-disabled="!enModify[key]">key:{{key}}</td>
+        <td><input type="text" ng-model="value.sal" ng-disabled="!enModify[key]"></td>
+        <td><input type="text" ng-model="value.title" ng-disabled="!enModify[key]"></td>
         <td>
             {{value.$$hashKey}}
             <button class="btn btn-default btn-sm" ng-click="edit(key,value)" ng-if="enModify[key]">

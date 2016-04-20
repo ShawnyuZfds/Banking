@@ -1,0 +1,20 @@
+.fadeAn {
+    transition: 1s linear all;
+    -webkit-transition: 1s linear all;
+}
+
+.fadeAn.ng-enter {
+    opacity: 0;
+}
+
+.fadeAn.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+.fadeAn.ng-leave {
+    opacity: 1;
+}
+
+.fadeAn.ng-leave.ng-leave-active {
+    opacity: 0;
+}

@@ -1,6 +1,6 @@
 'use strict';
 angular.module('myApp', ['ui.router', 'ngRoute', 'controllers', 'directives',
-        'services', 'ngResource', 'filters', 'pascalprecht.translate'])
+        'services', 'ngResource', 'filters', 'pascalprecht.translate', 'ngAnimate'])
 
     .config(function ($routeProvider, $locationProvider, $stateProvider, $translateProvider) {
         $stateProvider
